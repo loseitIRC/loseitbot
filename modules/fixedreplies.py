@@ -27,6 +27,12 @@ def spontaneousReply(bot, trigger):
 for pattern in patterns.keys():
     module.rule(pattern)(spontaneousReply)
 
+@module.rule(".*$nickname.*")
+def stoicAction(bot, trigger):
+    print(trigger.tags.keys())
+    if 'intent' in trigger.tags.keys() and trigger.tags['intent'] == 'ACTION':
+        bot.action("stares at " + str(trigger.user))
+        
 @module.rule(".*bad bot\W?")
 def whydontyouloveme(bot, trigger):
     bot.say(":[")
