@@ -4,6 +4,7 @@ import random
 @module.commands("how(\s?many|\s?much)?")
 @module.example(".how much spam")
 def howmany(bot, trigger):
+    """ Ask how many/how much of something """
     thing = trigger.group(3).split(" ")[0]
     if thing is not None:
         thing = ' ' + thing

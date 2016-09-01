@@ -3,6 +3,7 @@ from sopel import module
 @module.commands('challenge')
 @module.example('.challenge')
 def challenge(bot, trigger):
+    """ Get information about the current #loseit challenge """
     if trigger.group(2) and trigger.admin:
         try:
             with open(bot.config.homedir + '/challenge.txt', 'w') as f:
@@ -11,6 +12,9 @@ def challenge(bot, trigger):
         except:
             bot.say("Something went wrong.")
     elif not trigger.group(2):
+        if trigger.sender is not "#loseit":
+            return False
+
         try:
             with open(bot.config.homedir + '/challenge.txt') as f:
                bot.say(f.readline())

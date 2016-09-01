@@ -3,6 +3,7 @@ import random
 
 @module.commands('who')
 def who(bot, trigger):
+    """ Choose from users in this channel """
     # Ideally this should use bot.channels[trigger.sender].users, but it
     # seems that list is not actually properly kept up to date...
     whoIsHere = list(bot.privileges[trigger.sender].keys())
