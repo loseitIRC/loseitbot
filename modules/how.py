@@ -2,6 +2,7 @@ from sopel import module
 import random
 
 @module.commands("how(\s?many|\s?much)?")
+@module.example(".how much spam")
 def howmany(bot, trigger):
     thing = trigger.group(3).split(" ")[0]
     if thing is not None:
