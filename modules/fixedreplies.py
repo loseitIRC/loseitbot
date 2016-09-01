@@ -8,5 +8,10 @@ keywords = {
 }
 
 @module.commands(*keywords.keys())
+@module.example('.' + ', .'.join(keywords.keys()))
 def linkreply(bot, trigger):
-      bot.reply(keywords[trigger.group(1)])
+    bot.reply(keywords[trigger.group(1)])
+
+@module.rule(".*bad bot\W?")
+def whydontyouloveme(bot, trigger):
+    bot.say(":[")
