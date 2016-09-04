@@ -36,3 +36,7 @@ def stoicAction(bot, trigger):
 @module.rule(".*bad bot\W?")
 def whydontyouloveme(bot, trigger):
     bot.say(":[")
+
+@module.rule(".*good bot\W?")
+def senpaiNoticedMe(bot, trigger):
+    bot.say(":]")
