@@ -12,7 +12,7 @@ def challenge(bot, trigger):
         except:
             bot.say("Something went wrong.")
     elif not trigger.group(2):
-        if trigger.sender[0] is "#" and trigger.sender is not "#loseit":
+        if trigger.sender[0] is "#" and not trigger.sender.startswith("#loseit"):
             return False
 
         try:
