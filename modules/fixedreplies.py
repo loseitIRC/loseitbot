@@ -7,6 +7,8 @@ commands = {
     ,'source' : 'https://github.com/loseitIRC/loseitbot'
     ,'faq' : 'https://www.reddit.com/r/loseit/wiki/faq'
     ,'usda' : 'http://www.nal.usda.gov/fnic/foodcomp/search/index.html'
+    ,'200' : 'What 200 calories look like: www.wisegeek.com/what-does-200-calories-look-like.htm'
+    ,'2000' : 'What 2000 calories look like: http://www.nytimes.com/interactive/2014/12/22/upshot/what-2000-calories-looks-like.html'
 }
 
 patterns = {
