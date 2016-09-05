@@ -1,19 +1,22 @@
 from sopel import module
 
 commands = {
-    'tdee': 'https://loseitirc.github.io/tdeecalc/'
-    ,'ss': 'http://liamrosen.com/fitness.html'
-    ,'docs' : 'https://github.com/loseitIRC/loseitdocs'
-    ,'source' : 'https://github.com/loseitIRC/loseitbot'
-    ,'faq' : 'https://www.reddit.com/r/loseit/wiki/faq'
-    ,'usda' : 'http://www.nal.usda.gov/fnic/foodcomp/search/index.html'
-    ,'200' : 'What 200 calories look like: www.wisegeek.com/what-does-200-calories-look-like.htm'
+    '200' : 'What 200 calories look like: www.wisegeek.com/what-does-200-calories-look-like.htm'
     ,'2000' : 'What 2000 calories look like: http://www.nytimes.com/interactive/2014/12/22/upshot/what-2000-calories-looks-like.html'
+    ,'docs' : 'https://github.com/loseitIRC/loseitdocs'
+    ,'faq' : 'https://www.reddit.com/r/loseit/wiki/faq'
+    ,'flowchart' : 'The calorie counting flowchart: http://i.imgur.com/Nn04Cfs.png'
+    ,'source' : 'https://github.com/loseitIRC/loseitbot'
+    ,'ss': 'http://liamrosen.com/fitness.html'
+    ,'tdee': 'https://loseitirc.github.io/tdeecalc/'
+    ,'usda' : 'http://www.nal.usda.gov/fnic/foodcomp/search/index.html'
 }
 
 patterns = {
     'NSV\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
+    'NSV mean\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'GW\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
+    ,'GW mean\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
 }
 
 @module.commands(*commands.keys())
