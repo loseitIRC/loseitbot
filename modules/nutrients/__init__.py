@@ -47,7 +47,11 @@ def lookupFoodAndReply(bot, trigger, replyFmt, nutrient=CALORIE):
         return False
 
     # First, let's just try to find the user's whole request
-    res = foodQuery(["%%%s%%" % foodName], nutrient=nutrient)
+    res = foodQuery(["%s%%" % foodName], nutrient=nutrient)
+
+    if not res:
+        # Then, let's try their query with a wildcard in front, too
+        res = foodQuery(["%%%s%%" % foodName], nutrient=nutrient)
 
     if not res:
         # look for anything that matches all terms
@@ -73,6 +77,7 @@ def foodQuery(foodNames, nutrient=CALORIE):
     '''
     ,' AND '.join(['Long_Desc LIKE ?'] * len(foodNames))
     ,''' AND Nutr_No = '%i' ''' % nutrient
+    ,'ORDER BY length(Long_Desc)' # let's be naive and pick the shortest result
     ,'LIMIT 1;'
     ])
 
