@@ -14,7 +14,7 @@ commands = {
 
 patterns = {
     'NSV\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
-    'NSV mean\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
+    ,'NSV mean\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'GW\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'GW mean\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
 }
