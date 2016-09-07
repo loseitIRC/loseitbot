@@ -6,6 +6,7 @@ commands = {
     ,'docs' : 'https://github.com/loseitIRC/loseitdocs'
     ,'faq' : 'https://www.reddit.com/r/loseit/wiki/faq'
     ,'flowchart' : 'The calorie counting flowchart: http://i.imgur.com/Nn04Cfs.png'
+    ,'mfp' : 'https://www.myfitnesspal.com'
     ,'source' : 'https://github.com/loseitIRC/loseitbot'
     ,'ss': 'http://liamrosen.com/fitness.html'
     ,'tdee': 'https://loseitirc.github.io/tdeecalc/'
