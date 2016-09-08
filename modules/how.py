@@ -5,9 +5,9 @@ import random
 @module.example(".how much spam")
 def howmany(bot, trigger):
     """ Ask how many/how much of something """
-    thing = trigger.group(3).split(" ")[0]
+    thing = trigger.group(3)
     if thing is not None:
-        thing = ' ' + thing
+        thing = ' ' + thing.split(" ")[0]
         if thing[-1].isalpha() and thing[-1] is not 's':
             thing += 's'
     else:
