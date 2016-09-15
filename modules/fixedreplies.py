@@ -37,7 +37,7 @@ for pattern in patterns.keys():
 def stoicAction(bot, trigger):
     print(trigger.tags.keys())
     if 'intent' in trigger.tags.keys() and trigger.tags['intent'] == 'ACTION':
-        bot.action("stares at " + str(trigger.user))
+        bot.action("stares at " + str(trigger.nick))
         
 @module.rule(".*bad bot\W?")
 def whydontyouloveme(bot, trigger):
