@@ -3,7 +3,7 @@ from sopel import module
 commands = {
     '200' : 'What 200 calories look like: www.wisegeek.com/what-does-200-calories-look-like.htm'
     ,'2000' : 'What 2000 calories look like: http://www.nytimes.com/interactive/2014/12/22/upshot/what-2000-calories-looks-like.html'
-    ,'docs' : 'https://github.com/loseitIRC/loseitdocs'
+    ,'docs' : 'https://loseitirc.github.io/loseitdocs/'
     ,'faq' : 'https://www.reddit.com/r/loseit/wiki/faq'
     ,'flowchart' : 'The calorie counting flowchart: http://i.imgur.com/Nn04Cfs.png'
     ,'mfp' : 'https://www.myfitnesspal.com'
@@ -11,14 +11,21 @@ commands = {
     ,'ss': 'http://liamrosen.com/fitness.html'
     ,'tdee': 'https://loseitirc.github.io/tdeecalc/'
     ,'usda' : 'http://www.nal.usda.gov/fnic/foodcomp/search/index.html'
+    ,'visualbmi' : 'http://visualbmi.com/'
+    ,'whatwillilooklike' : 'http://visualbmi.com/'
 }
 
 patterns = {
-    'NSV\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
+    '^!\s*$': '¡'
+    ,'.*>\s*implying.*': '>implying implication'
+    ,'.*\Walot': 'http://i.imgur.com/C4Oao7G.png'
+    ,'NSV\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'NSV mean\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'GW\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'GW mean\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
+    ,'.*smoke weed.*': 'erryday.'
 }
+
 
 @module.commands(*commands.keys())
 @module.example('.' + ', .'.join(commands.keys()))
@@ -33,15 +40,17 @@ def spontaneousReply(bot, trigger):
 for pattern in patterns.keys():
     module.rule(pattern)(spontaneousReply)
 
+
 @module.rule(".*$nickname.*")
 def stoicAction(bot, trigger):
-    print(trigger.tags.keys())
     if 'intent' in trigger.tags.keys() and trigger.tags['intent'] == 'ACTION':
         bot.action("stares at " + str(trigger.nick))
         
+
 @module.rule(".*bad bot\W?")
 def whydontyouloveme(bot, trigger):
     bot.say(":[")
+
 
 @module.rule(".*good bot\W?")
 def senpaiNoticedMe(bot, trigger):
