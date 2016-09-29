@@ -21,6 +21,16 @@ def caloriesCmd(bot, trigger):
     lookup = lookupFoodAndReply(bot, trigger, replyFmt, nutrient=CALORIE)
 
 
+@module.commands("protein")
+@module.example("!protein fried egg")
+def proteinCmd(bot, trigger):
+    """ 
+    Retrieve the amount of protein per 100g of a food from USDA's NDB SR28
+    """
+    replyFmt = '"%s" has %.1f g protein per 100 g'
+    lookup = lookupFoodAndReply(bot, trigger, replyFmt, nutrient=PROTEIN)
+
+
 @module.commands("fat")
 @module.example("!fat cheddar cheese")
 def fatCmd(bot, trigger):
