@@ -10,6 +10,6 @@ def who(bot, trigger):
     if re.match(r'loves snoopjedi', trigger.group(2).lower()):
         bot.reply("No one loves SnoopJeDi")
     else:
-      whoIsHere = list(bot.privileges[trigger.sender].keys())
-      who = random.choice(whoIsHere)
-      bot.reply(str(who))
+        whoIsHere = list(bot.privileges[trigger.sender].keys())
+        who = random.choice(whoIsHere)
+        bot.reply(str(who))
