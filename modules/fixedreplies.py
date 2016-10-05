@@ -11,7 +11,7 @@ commands = {
     ,'mfp' : 'https://www.myfitnesspal.com'
     ,'source' : 'https://github.com/loseitIRC/loseitbot'
     ,'ss': 'http://liamrosen.com/fitness.html'
-    ,'subfaq', : 'https://www.reddit.com/r/loseit/wiki/faq'
+    ,'subfaq' : 'https://www.reddit.com/r/loseit/wiki/faq'
     ,'tdee': 'https://loseitirc.github.io/tdeecalc/'
     ,'usda' : 'https://ndb.nal.usda.gov/ndb/search/list'
     ,'visualbmi' : 'http://visualbmi.com/'
