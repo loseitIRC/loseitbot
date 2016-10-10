@@ -4,6 +4,7 @@ commands = {
     '200' : 'What 200 calories look like: www.wisegeek.com/what-does-200-calories-look-like.htm'
     ,'2000' : 'What 2000 calories look like: http://www.nytimes.com/interactive/2014/12/22/upshot/what-2000-calories-looks-like.html'
     ,'docs' : 'https://loseitirc.github.io/loseitdocs/'
+    ,'ed' : ' http://www.cdc.gov/nccdphp/dnpa/nutrition/pdf/r2p_energy_density.pdf'
     ,'faq' : 'https://loseitirc.github.io/loseitdocs/faq.html'
     ,'flowchart' : 'The calorie counting flowchart: http://i.imgur.com/Nn04Cfs.png'
     ,'harsh' : 'http://4chanfit.wikia.com/wiki/Harsh\'s_Worksheet_(WIP)'
@@ -15,6 +16,7 @@ commands = {
     ,'tdee': 'https://loseitirc.github.io/tdeecalc/'
     ,'usda' : 'https://ndb.nal.usda.gov/ndb/search/list'
     ,'visualbmi' : 'http://visualbmi.com/'
+    ,'water' : 'http://web.archive.org/web/20131114201153/http://www.scientificamerican.com/article.cfm?id=eight-glasses-water-per-day'
     ,'whatwillilooklike' : 'http://visualbmi.com/'
 }
 
