@@ -7,7 +7,7 @@ def who(bot, trigger):
     """ Choose from users in this channel """
     # Ideally this should use bot.channels[trigger.sender].users, but it
     # seems that list is not actually properly kept up to date...
-    if re.match(r'loves snoopjedi', trigger.group(2).lower()):
+    if trigger.group(2) and re.match(r'loves snoopjedi', trigger.group(2).lower()):
         bot.reply("No one loves SnoopJeDi")
     else:
         whoIsHere = list(bot.privileges[trigger.sender].keys())

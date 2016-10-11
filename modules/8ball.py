@@ -13,7 +13,7 @@ def howmany(bot, trigger):
     """ Ask the bot a yes or no question """
     if trigger.group(2) and trigger.group(2).lower().startswith("are you sure"):
         bot.reply("Did I stutter?")
-    elif re.match(r'loves?[\s]+snoopjedi', trigger.group(2).lower()):
+    elif trigger.group(2) and re.match(r'loves?[\s]+snoopjedi', trigger.group(2).lower()):
         bot.reply("No one loves SnoopJeDi")
     else:
         bot.reply(random.choice(responses))
