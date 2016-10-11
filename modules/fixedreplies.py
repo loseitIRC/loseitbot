@@ -52,11 +52,11 @@ def stoicAction(bot, trigger):
         bot.action("stares at " + str(trigger.nick))
         
 
-@module.rule(".*bad bot\W?")
+@module.rule(".*bad bot(\W|$)")
 def whydontyouloveme(bot, trigger):
     bot.say(":[")
 
 
-@module.rule(".*good bot\W?")
+@module.rule(".*good bot(\W|$)")
 def senpaiNoticedMe(bot, trigger):
     bot.say(":]")
