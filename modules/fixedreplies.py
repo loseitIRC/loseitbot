@@ -24,6 +24,7 @@ patterns = {
     '^!\s*$': '¡'
     ,'.*>\s*implying.*': '>implying implication'
     ,'.*\Walot': 'http://i.imgur.com/C4Oao7G.png'
+    ,'.*\Wmagic': 'https://i.imgur.com/YsbKHg1.gif'
     ,'NSV\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'NSV mean\?': 'NSV means non-scale victory.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'GW\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
