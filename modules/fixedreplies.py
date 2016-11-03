@@ -30,6 +30,7 @@ patterns = {
     ,'GW\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'GW mean\?': 'GW means goal weight.  See https://www.reddit.com/r/loseit/wiki/faq'
     ,'.*smoke weed.*': 'erryday.'
+    ,'\s*[iI]ndeed\s*': 'http://i.imgur.com/CRIcP.gif'
 }
 
 
