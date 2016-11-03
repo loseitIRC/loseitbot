@@ -1,7 +1,7 @@
 from sopel import module
 
 @module.commands('challenge')
-@module.example('.challenge')
+@module.example('!challenge or (admin only) !challenge new text')
 def challenge(bot, trigger):
     """ Get information about the current #loseit challenge """
     if trigger.group(2) and trigger.admin:
