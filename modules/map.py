@@ -7,10 +7,11 @@ geocoder = GoogleV3()
 mapurl = "http://jamesgerity.com/loseit/map"
 
 @module.commands('map')
+@module.example('!map Springfield, IL')
 def loseitmap(bot, trigger):
     """ Give link to user map, or set user location """
     if trigger.group(2) is None:
-        bot.reply("#loseit user map: %s" % mapurl)
+        bot.reply("#loseit user map (use !map Anywhere, CA to add yourself): %s" % mapurl)
     else:
         host = trigger.host
         nick = trigger.nick
