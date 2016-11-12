@@ -15,5 +15,7 @@ def howmany(bot, trigger):
         bot.reply("Did I stutter?")
     elif trigger.group(2) and re.match(r'loves?[\s]+snoopjedi', trigger.group(2).lower()):
         bot.reply("No one loves SnoopJeDi")
+    elif trigger.group(2) and re.match(r'butts?\??', trigger.group(2).lower()):
+        bot.reply("Butts are great ( ͡° ͜ʖ ͡°) yay butts")
     else:
         bot.reply(random.choice(responses))
