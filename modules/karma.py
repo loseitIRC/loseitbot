@@ -32,6 +32,23 @@ def getKarma(bot, trigger):
     bot.reply("%s has %i karma" % (who, bot.memory['karma'].get(whokey, 0)))
 
 
+@module.commands('check')
+def checkKarma(bot, trigger):
+    """ Show karma for a given username, but more betterer """
+    if trigger.group(2) is not None:
+        who = trigger.group(2).strip()
+    else:
+        who = trigger.nick
+
+    whokey = who.lower()
+
+    karma = bot.memory['karma'].get(whokey, 0)
+    if karma >= -1:
+        bot.reply("probably aight")
+    else:
+        bot.reply("kinda sketchy")
+
+
 @module.rule('(\w+)[:,]?\s*(\+\+|--)')
 @module.rate(60)
 def addKarma(bot, trigger):
@@ -55,3 +72,5 @@ def addKarma(bot, trigger):
         return False
 
     bot.memory['karma'][whokey] = bot.memory['karma'].get(whokey, 0) + karma_adj
+
+
