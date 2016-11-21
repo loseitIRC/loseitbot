@@ -32,7 +32,7 @@ patterns = {
 @module.commands(*commands.keys())
 @module.example('.' + ', .'.join(commands.keys()))
 def linkreply(bot, trigger):
-    bot.reply(commands[trigger.group(1)])
+    bot.reply(commands[trigger.group(1).lower()])
 
 def spontaneousReply(bot, trigger):
     bot.say(patterns[trigger.match.re.pattern])
