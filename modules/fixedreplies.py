@@ -6,6 +6,7 @@ commands = {
     ,'docs' : 'https://loseitirc.github.io/loseitdocs/'
     ,'ed' : ' http://www.cdc.gov/nccdphp/dnpa/nutrition/pdf/r2p_energy_density.pdf'
     ,'faq' : 'https://loseitirc.github.io/loseitdocs/faq.html'
+    ,'flair' : 'Instructions for /r/loseit flair: https://www.reddit.com/r/loseit/wiki/faq#wiki_how_do_i_update_my_flair.3F'
     ,'flowchart' : 'The calorie counting flowchart: http://i.imgur.com/Nn04Cfs.png'
     ,'harsh' : 'http://4chanfit.wikia.com/wiki/Harsh\'s_Worksheet_(WIP)'
     ,'metabolism' : 'https://www.reddit.com/r/fatlogic/comments/2i6oa3/can_you_actually_break_your_metabolism/ckzboth'
