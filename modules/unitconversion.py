@@ -4,7 +4,7 @@ LBS_PER_KG = 2.2
 M_PER_INCH = 2.54e-2
 INCH_PER_FEET = 12
 
-@module.commands("kg\s*(\d+)(\s*lbs?)?")
+@module.commands("kgs?\s*(\d+(.\d+)?)(\s*lbs?)?")
 @module.example("kg 200lb")
 def kgtolb(bot, trigger):
     """ Convert lbs to kg """
@@ -16,7 +16,7 @@ def kgtolb(bot, trigger):
     bot.reply("%.1f lbs is %.1f kg" % (lbs, kg))
 
 
-@module.commands("lbs?\s*(\d+)(\s*kgs?)?")
+@module.commands("lbs?\s*(\d+(.\d+)?)(\s*kgs?)?")
 @module.example("lb 200 kg")
 def lbtokg(bot, trigger):
     """ Convert kg to lbs """
