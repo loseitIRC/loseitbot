@@ -11,6 +11,7 @@ commands = {
     ,'harsh' : 'http://4chanfit.wikia.com/wiki/Harsh\'s_Worksheet_(WIP)'
     ,'metabolism' : 'https://www.reddit.com/r/fatlogic/comments/2i6oa3/can_you_actually_break_your_metabolism/ckzboth'
     ,'mfp' : 'https://www.myfitnesspal.com'
+    ,'nwcr' : 'http://www.nwcr.ws/'
     ,'source' : 'https://github.com/loseitIRC/loseitbot'
     ,'ss': 'http://liamrosen.com/fitness.html'
     ,'subfaq' : 'https://www.reddit.com/r/loseit/wiki/faq'
