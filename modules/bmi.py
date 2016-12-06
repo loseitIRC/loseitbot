@@ -1,35 +1,40 @@
 from sopel import module
+import re
 
 LBS_PER_KG = 2.2
 M_PER_INCH = 2.54e-2
 INCH_PER_FEET = 12
 
-@module.commands("bmi\D(\d+\.?\d*)\s*(lb[s]?|kg[s]?)\s*(\d+'[\d.]*\"?|\d+\.?\d*\s*(c?m))\s*")
+@module.commands("bmi")
 @module.example("bmi 200lb 5'11")
 def bmi(bot, trigger):
     """ Calculate user's bmi, supports lb,kg,m,cm,ft'in" """
-    weight, weightunit, height, heightunit = trigger.groups()[1:5]
+    if not trigger.group(2):
+        return bot.say("E.g.: !bmi 200lb 5'11\"")
 
-    print(trigger.groups())
-    print(weight)
-    print(float(weight))
+    cmd = ' '.join(filter(lambda x: x is not None, trigger.groups()[1:]))
+    weightgrps = re.search("(\d+\.?\d*)\s*(lb[s]?|kg[s]?)", cmd, re.IGNORECASE)
+    if weightgrps is None or len(weightgrps.groups()) < 2:
+        return bot.say("Must specify both a weight and a unit (lb, kg)")
+    weight, weightunit = weightgrps.groups()
+    heightgrps = re.search("(\d+'[\d.]*\"?|\d+\.?\d*\s*(c?m))", cmd, re.IGNORECASE)
+    if heightgrps is None or len(heightgrps.groups()) < 2:
+        return bot.say("Must specify both a height and a unit (m, cm, ft'in\")")
+    height, heightunit = heightgrps.groups()
+
     if weightunit.startswith("lb"):
         weight = float(weight) / LBS_PER_KG
     elif weightunit.startswith("kg"):
         weight = float(weight)
 
-    print("%s kg" % weight)
-
     if heightunit is None and height.find("'") > -1:
-        ft, inches = [float(qty.replace("\"","")) for qty in height.split("'")[0:2]]
+        ft, inches = [float(qty.replace("\"","")) if qty is not '' else 0 for qty in height.split("'")[0:2]]
         height = (ft*INCH_PER_FEET + inches) * M_PER_INCH
     elif heightunit.startswith("cm"):
         height = float(height[:-2])/100
     elif heightunit.startswith("m"):
         height = float(height[:-1])
     
-    print("%s m" % height)
-
     bmi = weight/(height**2)
 
     if bmi < 18.5:
