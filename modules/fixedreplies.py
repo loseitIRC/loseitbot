@@ -3,6 +3,7 @@ from sopel import module
 commands = {
     '200' : 'What 200 calories look like: www.wisegeek.com/what-does-200-calories-look-like.htm'
     ,'2000' : 'What 2000 calories look like: http://www.nytimes.com/interactive/2014/12/22/upshot/what-2000-calories-looks-like.html'
+    ,'cooking' : 'Recipes and other curated cooking suggestions: https://goo.gl/lF64F3'
     ,'docs' : 'https://loseitirc.github.io/loseitdocs/'
     ,'ed' : ' http://www.cdc.gov/nccdphp/dnpa/nutrition/pdf/r2p_energy_density.pdf'
     ,'faq' : 'https://loseitirc.github.io/loseitdocs/faq.html'
