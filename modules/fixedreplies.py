@@ -9,6 +9,7 @@ commands = {
     ,'faq' : 'https://loseitirc.github.io/loseitdocs/faq.html'
     ,'flair' : 'Instructions for /r/loseit flair: https://www.reddit.com/r/loseit/wiki/faq#wiki_how_do_i_update_my_flair.3F'
     ,'flowchart' : 'The calorie counting flowchart: http://i.imgur.com/Nn04Cfs.png'
+    ,'hackdiet' : 'The Hacker\'s Diet ebook: https://www.fourmilab.ch/hackdiet/e4/'
     ,'harsh' : 'http://4chanfit.wikia.com/wiki/Harsh\'s_Worksheet_(WIP)'
     ,'metabolism' : 'https://www.reddit.com/r/fatlogic/comments/2i6oa3/can_you_actually_break_your_metabolism/ckzboth'
     ,'mfp' : 'https://www.myfitnesspal.com'
