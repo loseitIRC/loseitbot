@@ -5,19 +5,30 @@ LBS_PER_KG = 2.2
 M_PER_INCH = 2.54e-2
 INCH_PER_FEET = 12
 
+
+def extractHeight(cmd):
+    return re.search("(\d+'[\d.]*\"?|\d+\.?\d*\s*(c?m))", cmd, re.IGNORECASE)
+
+
+def extractWeight(cmd):
+    return re.search("(\d+\.?\d*)\s*(lb[s]?|kg[s]?)", cmd, re.IGNORECASE)
+
+
 @module.commands("bmi")
 @module.example("bmi 200lb 5'11")
 def bmi(bot, trigger):
-    """ Calculate user's bmi, supports lb,kg,m,cm,ft'in" """
+    """ Calculate user's BMI, supports lb,kg,m,cm,ft'in" """
     if not trigger.group(2):
         return bot.say("E.g.: !bmi 200lb 5'11\"")
 
-    cmd = ' '.join(filter(lambda x: x is not None, trigger.groups()[1:]))
-    weightgrps = re.search("(\d+\.?\d*)\s*(lb[s]?|kg[s]?)", cmd, re.IGNORECASE)
+    cmd = ' '.join(x for x in trigger.groups()[1:] if x is not None)
+
+    weightgrps = extractWeight(cmd)
     if weightgrps is None or len(weightgrps.groups()) < 2:
         return bot.say("Must specify both a weight and a unit (lb, kg)")
     weight, weightunit = weightgrps.groups()
-    heightgrps = re.search("(\d+'[\d.]*\"?|\d+\.?\d*\s*(c?m))", cmd, re.IGNORECASE)
+
+    heightgrps = extractHeight(cmd)
     if heightgrps is None or len(heightgrps.groups()) < 2:
         return bot.say("Must specify both a height and a unit (m, cm, ft'in\")")
     height, heightunit = heightgrps.groups()
