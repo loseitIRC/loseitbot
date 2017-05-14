@@ -1,33 +1,75 @@
 from sopel import module
+from sopel.config.types import StaticSection, ValidatedAttribute, ListAttribute
+import os
+
+class DefconSection(StaticSection):
+    channels = ListAttribute('channels')
+    state = ValidatedAttribute('state', int, default=0)
+    pass
+
+def configure(config):
+    config.define_section('defcon', DefconSection)
+
+def setup(bot):
+    bot.config.define_section('defcon', DefconSection)
+    try:
+        fn = os.path.join(bot.config.core.homedir, 'defcon_nowarn_users.cfg')
+        with open(fn, 'r') as f:
+            bot.config.defcon.nowarn_users = set(f.read())
+            import q; q.q(bot.config.defcon.nowarn_users)
+    except FileNotFoundError:
+        bot.config.defcon.nowarn_users = set()
 
 @module.require_chanmsg
+@module.require_admin
 @module.commands('defcon')
 @module.priority('high')
 def defcon(bot, trigger):
-    """ Set Defcon on or off.
+    """ 
+    Set Defcon on or off.
     Defcon On = cmode +M - registered only, tell newcomers
     Defcon Off = cmode -M - all talk
     """
-    if bot.privileges[trigger.sender][bot.nick] < module.HALFOP:
-        return bot.reply("I'm not a channel operator!")
-    if not trigger.admin:
-      bot.reply("You're not my IRC Supervisor!")
-    else:
-      if trigger.group(2):
-        state = bool(trigger.group(2))
-        modeset = "+M" if state else "-M"
+    if trigger.group(2):
+        state = trigger.group(2)
+        modeset = 1 if state == "on" else 0
         bot.config.defcon.state = state
-        bot.write(("MODE", trigger.sender, modeset))
-        bot.reply("Defcon Set: {}".format(trigger.group(2)))
-      else
-        bot.reply("Must specify defcon boolean")
+    bot.reply("Current Defcon: {}".format(bot.config.defcon.state))
 
-@module.event("JOIN")
+def get_nowarn_users(bot):
+    """ Get list of lowercase usernames to never warn about defcon """
+    return {u.lower() for u in bot.config.defcon.nowarn_users}
+
+def add_nowarn_user(bot, user):
+    nowarn_users = bot.config.defcon.nowarn_users
+    nowarn_users.add(user)
+    fn = os.path.join(bot.config.core.homedir, 'defcon_nowarn_users.cfg')
+    with open(fn, 'w') as f:
+        f.write(repr(nowarn_users))
+        
+
+@module.event('JOIN')
+@module.rule('.*')
 def welcome(bot, trigger):
   """ Welcome users joining while channel is in defcon """
-  if bot.config.defcon.state:
-    bot.reply("This channel is currently under moderation. \
-Please register your nickname (or identify yourself with services) to speak. \
-See `/msg NickServ HELP` for details", notice=True)
-  else:
-    pass
+  defcon = bot.config.defcon.state
+  nowarn_users = get_nowarn_users(bot)
+  defconchans = bot.config.defcon.channels
+  chan = trigger.sender
+  user = str(trigger.nick).lower()
+  if defcon and str(chan) in defconchans and user not in nowarn_users:
+      bot.notice("Welcome to {channel}! "
+                "Please register your nickname (or identify yourself with "
+                "services) to speak. Type /msg NickServ HELP for details. "
+                "Reply with !nowarn if you'd prefer not to see this message."
+                .format(channel=chan), 
+                trigger.nick)
+
+@module.require_privmsg
+@module.commands("nowarn")
+def disablewarning(bot, trigger):
+    nowarn_users = get_nowarn_users(bot)
+    user = str(trigger.nick).lower()
+    if user not in nowarn_users:
+        add_nowarn_user(bot, user)
+        bot.reply("Okay, I won't warn you about moderated channels on join.")
