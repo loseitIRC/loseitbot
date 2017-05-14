@@ -23,7 +23,7 @@ commands = {
     ,'trendweight' : 'https://trendweight.com/demo/'
     ,'tdee': 'https://loseitirc.github.io/tdeecalc/'
     ,'usda' : 'https://ndb.nal.usda.gov/ndb/search/list'
-    ,'visualbmi' : 'http://visualbmi.com/'
+    ,'visualbmi' : 'https://loseitirc.github.io/visualbmi/'
     ,'water' : 'http://web.archive.org/web/20131114201153/http://www.scientificamerican.com/article.cfm?id=eight-glasses-water-per-day'
     ,'whatwillilooklike' : 'http://visualbmi.com/'
 }
