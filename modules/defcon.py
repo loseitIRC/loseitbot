@@ -1,5 +1,4 @@
 from sopel import module
-import re
 
 @module.require_chanmsg
 @module.commands('defcon')
@@ -15,7 +14,9 @@ def defcon(bot, trigger):
       bot.reply("You're not my IRC Supervisor!")
     else:
       if trigger.group(2):
-        modeset = "+M" if bool(trigger.group(2)) else "-M"
+        state = bool(trigger.group(2))
+        modeset = "+M" if state else "-M"
+        bot.config.defcon.state = state
         bot.write(("MODE", trigger.sender, modeset))
         bot.reply("Defcon Set: {}".format(trigger.group(2)))
       else
@@ -24,4 +25,9 @@ def defcon(bot, trigger):
 @module.event("JOIN")
 def welcome(bot, trigger):
   """ Welcome users joining while channel is in defcon """
-  pass
+  if bot.config.defcon.state:
+    bot.reply("This channel is currently under moderation. \
+Please register your nickname (or identify yourself with services) to speak. \
+See `/msg NickServ HELP` for details", notice=True)
+  else:
+    pass
