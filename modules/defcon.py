@@ -33,7 +33,11 @@ def defcon(bot, trigger):
     if trigger.group(2):
         state = trigger.group(2)
         modeset = 1 if state == "on" else 0
-        bot.config.defcon.state = state
+        try:
+            bot.config.defcon.state = int(state)
+        except ValueError:
+            bot.reply("Value must be a valid base10 integer. E.g. !defcon 1")
+            return False
     bot.reply("Current Defcon: {}".format(bot.config.defcon.state))
 
 def get_nowarn_users(bot):
