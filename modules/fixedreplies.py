@@ -20,7 +20,7 @@ commands = {
     ,'source' : 'https://github.com/loseitIRC/loseitbot'
     ,'ss': 'http://liamrosen.com/fitness.html'
     ,'subfaq' : 'https://www.reddit.com/r/loseit/wiki/faq'
-    ,'trendweight' : 'https://trendweight.com/demo/'
+    ,'trendweight' : 'https://trendweight.com/demo/ (see also https://www.fourmilab.ch/hackdiet/e4/pencilpaper.html)'
     ,'tdee': 'https://loseitirc.github.io/tdeecalc/'
     ,'usda' : 'https://ndb.nal.usda.gov/ndb/search/list'
     ,'visualbmi' : 'https://loseitirc.github.io/visualbmi/'
