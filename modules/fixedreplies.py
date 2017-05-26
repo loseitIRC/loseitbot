@@ -17,6 +17,7 @@ commands = {
     ,'metabolism' : 'https://www.reddit.com/r/fatlogic/comments/2i6oa3/can_you_actually_break_your_metabolism/ckzboth'
     ,'mfp' : 'https://www.myfitnesspal.com'
     ,'nwcr' : 'http://www.nwcr.ws/'
+    ,'protein' : 'Consumption of 0.6-1.0 g/lb protein (along with lifting) minimizes muscle loss: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2858200/'
     ,'source' : 'https://github.com/loseitIRC/loseitbot'
     ,'ss': 'http://liamrosen.com/fitness.html'
     ,'subfaq' : 'https://www.reddit.com/r/loseit/wiki/faq'
