@@ -32,7 +32,6 @@ def defcon(bot, trigger):
     """
     if trigger.group(2):
         state = trigger.group(2)
-        modeset = 1 if state == "on" else 0
         try:
             bot.config.defcon.state = int(state)
         except ValueError:
