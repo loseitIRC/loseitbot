@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from sopel import module
 import os
 import sqlite3
+import requests
 
 # Nutr_No constants
 CALORIE = 208
@@ -11,90 +12,57 @@ CARB = 205
 SUGAR = 269
 FIBER = 291
 
+with open('usdaapikey', 'r') as f:
+    APIKEY = f.read().strip()
+
+class NDBSearch():
+    def __init__(self):
+        self.exclude_foodgroups = {'Baby Foods'}
+
+    def process_response(self, r):
+        if r.ok:
+            return r.json()
+        else:
+            return False 
+
+    def search(self, name):
+        payload = {'format': 'json',
+                  'ds': 'Standard Reference',
+                  'q': name,
+                  'sort': 'r',
+                  'max': 50,
+                  'api_key': APIKEY}
+        url = 'https://api.nal.usda.gov/ndb/search/'
+        r = requests.get(url, params=payload)
+        return self.process_response(r)
+    
+    def get_calories(self, ndbno):
+        payload = {'format': 'json', 
+                   'api_key': APIKEY,
+                   'nutrients': CALORIE,
+                   'ndbno': ndbno}
+        url = 'http://api.nal.usda.gov/ndb/nutrients/'
+        r = requests.get(url, params=payload)
+        data = self.process_response(r)
+        if data:
+            return [int(n['gm']) for n in data['report']['foods'][0]['nutrients'] if int(n['nutrient_id']) == CALORIE][0]
+        
+NDBSearch = NDBSearch()
+
+@module.rate(10)
 @module.commands("cal", "calories")
 @module.example("!calories cheddar cheese")
-def caloriesCmd(bot, trigger):
-    """ 
-    Retrieve the amount of calories per 100g of a food from USDA's NDB SR28
-    """
-    replyFmt = '"%s" has %i kcal per 100 g'
-    lookup = lookupFoodAndReply(bot, trigger, replyFmt, nutrient=CALORIE)
+def calories_command(bot, trigger):
+    query = trigger.group(2)
+    results = NDBSearch.search(query)
+    topfood = results.get('list', {}).get('item')
+    if topfood is not None:
+        topfood = [food for food in topfood if food['group'] not in NDBSearch.exclude_foodgroups][0]
+        foodname = topfood['name']
+        ndbno = topfood['ndbno']
+        calories = NDBSearch.get_calories(ndbno)
+        if calories is not None:
+            bot.reply('"{foodname}" has {calories:.0f} kcal per 100 g. See more results at https://ndb.nal.usda.gov/ndb/search/list?qlookup={query}'.format(foodname=foodname, calories=calories, query=requests.utils.quote(query)))
+            return
+    bot.reply("No result")
 
-
-@module.commands("protein")
-@module.example("!protein fried egg")
-def proteinCmd(bot, trigger):
-    """ 
-    Retrieve the amount of protein per 100g of a food from USDA's NDB SR28
-    """
-    replyFmt = '"%s" has %.1f g protein per 100 g'
-    lookup = lookupFoodAndReply(bot, trigger, replyFmt, nutrient=PROTEIN)
-
-
-@module.commands("fat")
-@module.example("!fat cheddar cheese")
-def fatCmd(bot, trigger):
-    """ 
-    Retrieve the amount of fat per 100g of a food from USDA's NDB SR28
-    """
-    replyFmt = '"%s" has %.1f g fat per 100 g'
-    lookup = lookupFoodAndReply(bot, trigger, replyFmt, nutrient=FAT)
-
-
-@module.commands("carb[s]?")
-@module.example("!carb cheddar cheese")
-def carbCmd(bot, trigger):
-    """ 
-    Attempts to retrieve the amount of carb per 100g of a food from USDA's NDB SR28
-    """
-    replyFmt = '"%s" has %.1f g carb per 100 g'
-    lookup = lookupFoodAndReply(bot, trigger, replyFmt, nutrient=CARB)
-
-
-def lookupFoodAndReply(bot, trigger, replyFmt, nutrient=CALORIE):
-    foodName = trigger.group(2)
-    if not foodName:
-        return False
-
-    # First, let's just try to find the user's whole request
-    res = foodQuery(["%s%%" % foodName], nutrient=nutrient)
-
-    if not res:
-        # Then, let's try their query with a wildcard in front, too
-        res = foodQuery(["%%%s%%" % foodName], nutrient=nutrient)
-
-    if not res:
-        # look for anything that matches all terms
-        foodNames = ["%%%s%%" % fn for fn in foodName.split(' ')]
-        res = foodQuery(foodNames, nutrient=nutrient)
-
-    if res is not False:
-        bot.reply(replyFmt % res)
-    else:
-        bot.reply("No results.")
-
-
-def foodQuery(foodNames, nutrient=CALORIE):
-    conn = sqlite3.connect(os.path.dirname(__file__) + '/nutrients.db')
-    c = conn.cursor()
-    cmd = ''.join([
-    '''
-    SELECT Long_Desc, Nutr_Val 
-    FROM food_des 
-    JOIN nut_data 
-        ON food_des.NDB_No = nut_data.NDB_No 
-    WHERE
-    '''
-    ,' AND '.join(['Long_Desc LIKE ?'] * len(foodNames))
-    ,''' AND Nutr_No = '%i' ''' % nutrient
-    ,'ORDER BY length(Long_Desc)' # let's be naive and pick the shortest result
-    ,'LIMIT 1;'
-    ])
-
-    c.execute(cmd, tuple(foodNames))
-
-    foods = c.fetchall()
-    if len(foods) is 0:
-        return False
-    else:
-        return (foods[0][0], foods[0][1])
