@@ -1,5 +1,7 @@
 from __future__ import absolute_import
+from fuzzywuzzy import process, fuzz
 from sopel import module
+
 import os
 import sqlite3
 import requests
@@ -55,14 +57,15 @@ NDBSearch = NDBSearch()
 def calories_command(bot, trigger):
     query = trigger.group(2)
     results = NDBSearch.search(query)
-    topfood = results.get('list', {}).get('item')
-    if topfood is not None:
-        topfood = [food for food in topfood if food['group'] not in NDBSearch.exclude_foodgroups][0]
-        foodname = topfood['name']
-        ndbno = topfood['ndbno']
-        calories = NDBSearch.get_calories(ndbno)
-        if calories is not None:
-            bot.reply('"{foodname}" has {calories:.0f} kcal per 100 g. See more results at https://ndb.nal.usda.gov/ndb/search/list?qlookup={query}'.format(foodname=foodname, calories=calories, query=requests.utils.quote(query)))
-            return
+    if 'list' in results.keys():
+      filtered_results = [food['name'] for food in results['list']['item'] if food['group'] not in NDBSearch.exclude_foodgroups]
+      weighted = process.extract(query, filtered_results, scorer=fuzz.token_sort_ratio)
+      topFood = [food for food in results['list']['item'] if food['name'] == weighted[0][0]][0]
+      foodname = topfood['name']
+      ndbno = topfood['ndbno']
+      calories = NDBSearch.get_calories(ndbno)
+      if calories is not None:
+          bot.reply('"{foodname}" has {calories:.0f} kcal per 100 g. See more results at https://ndb.nal.usda.gov/ndb/search/list?qlookup={query}'.format(foodname=foodname, calories=calories, query=requests.utils.quote(query)))
+          return
     bot.reply("No result")
 
