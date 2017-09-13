@@ -5,7 +5,6 @@ import os
 class DefconSection(StaticSection):
     channels = ListAttribute('channels')
     state = ValidatedAttribute('state', int, default=0)
-    pass
 
 def configure(config):
     config.define_section('defcon', DefconSection)
@@ -20,7 +19,6 @@ def setup(bot):
     except FileNotFoundError:
         bot.config.defcon.nowarn_users = set()
 
-@module.require_chanmsg
 @module.require_admin
 @module.commands('defcon')
 @module.priority('high')
