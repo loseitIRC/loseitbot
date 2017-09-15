@@ -8,6 +8,7 @@ responses = [
 ]
 
 @module.commands("8")
+@module.commands("?")
 @module.example("!8 is this the real life?")
 def howmany(bot, trigger):
     """ Ask the bot a yes or no question """
@@ -17,5 +18,7 @@ def howmany(bot, trigger):
         bot.reply("No one loves SnoopJeDi")
     elif trigger.group(2) and re.match(r'butts?\??', trigger.group(2).lower()):
         bot.reply("Butts are great ( ͡° ͜ʖ ͡°) yay butts")
+        elif trigger.group(2) and re.match(r'good?\??', trigger.group(2).lower()):
+        bot.reply("Funk3 smells like Fresca")
     else:
         bot.reply(random.choice(responses))
