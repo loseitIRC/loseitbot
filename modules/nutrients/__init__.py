@@ -14,7 +14,10 @@ CARB = 205
 SUGAR = 269
 FIBER = 291
 
-with open('usdaapikey', 'r') as f:
+LOOKUPURL = "https://ndb.nal.usda.gov/ndb/search/list"
+
+apikeyfn = os.path.join(os.path.dirname(__file__), 'usdaapikey')
+with open(apikeyfn, 'r') as f:
     APIKEY = f.read().strip()
 
 class NDBSearch():
@@ -25,7 +28,7 @@ class NDBSearch():
         if r.ok:
             return r.json()
         else:
-            return False 
+            return {}
 
     def search(self, name):
         payload = {'format': 'json',
@@ -58,14 +61,21 @@ def calories_command(bot, trigger):
     query = trigger.group(2)
     results = NDBSearch.search(query)
     if 'list' in results.keys():
-      filtered_results = [food['name'] for food in results['list']['item'] if food['group'] not in NDBSearch.exclude_foodgroups]
-      weighted = process.extract(query, filtered_results, scorer=fuzz.token_sort_ratio)
-      topFood = [food for food in results['list']['item'] if food['name'] == weighted[0][0]][0]
-      foodname = topfood['name']
-      ndbno = topfood['ndbno']
-      calories = NDBSearch.get_calories(ndbno)
-      if calories is not None:
-          bot.reply('"{foodname}" has {calories:.0f} kcal per 100 g. See more results at https://ndb.nal.usda.gov/ndb/search/list?qlookup={query}'.format(foodname=foodname, calories=calories, query=requests.utils.quote(query)))
-          return
+        filtered_results = [food['name'] for food in results['list']['item'] if food['group'] not in NDBSearch.exclude_foodgroups]
+        weighted = process.extract(query, filtered_results, scorer=fuzz.token_sort_ratio)
+        topFood = [food for food in results['list']['item'] if food['name'] == weighted[0][0]][0]
+        foodname = topFood['name']
+        ndbno = topFood['ndbno']
+        calories = NDBSearch.get_calories(ndbno)
+        if calories is not None:
+              replystr = ('"{foodname}" has {calories:.0f} kcal per 100 g.'
+                          'See more results at {url}?qlookup={query}')
+              bot.reply(replystr.format(
+                foodname=foodname, 
+                calories=calories, 
+                url=LOOKUPURL,
+                query=requests.utils.quote(query))
+              )
+              return
     bot.reply("No result")
 
