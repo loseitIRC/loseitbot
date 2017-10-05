@@ -69,7 +69,7 @@ def calories_command(bot, trigger):
         calories = NDBSearch.get_calories(ndbno)
         if calories is not None:
               replystr = ('"{foodname}" has {calories:.0f} kcal per 100 g.'
-                          'See more results at {url}?qlookup={query}')
+                          'See more results at {url}?ds=Standard+Reference&qlookup={query}')
               bot.reply(replystr.format(
                 foodname=foodname, 
                 calories=calories, 
