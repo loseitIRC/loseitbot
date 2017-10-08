@@ -46,11 +46,18 @@ class NDBSearch():
                    'api_key': APIKEY,
                    'nutrients': CALORIE,
                    'ndbno': ndbno}
-        url = 'http://api.nal.usda.gov/ndb/nutrients/'
+        url = 'https://api.nal.usda.gov/ndb/nutrients/'
         r = requests.get(url, params=payload)
         data = self.process_response(r)
-        if data:
-            return [int(n['gm']) for n in data['report']['foods'][0]['nutrients'] if int(n['nutrient_id']) == CALORIE][0]
+        if data and data['report']['total'] > 0:
+            firstfood = data['report']['foods'][0]
+            nutrients = firstfood['nutrients']
+            for n in nutrients:
+                nid = int(n['nurient_id'])
+                calperg = next(n['gm'] for n in nutrients if nid == CALORIE)
+            return int(calperg)
+        else:
+            return False
         
 NDBSearch = NDBSearch()
 
@@ -61,13 +68,14 @@ def calories_command(bot, trigger):
     query = trigger.group(2)
     results = NDBSearch.search(query)
     if 'list' in results.keys():
+        import q; q.q(results['list']['item'])
         filtered_results = [food['name'] for food in results['list']['item'] if food['group'] not in NDBSearch.exclude_foodgroups]
         weighted = process.extract(query, filtered_results, scorer=fuzz.token_sort_ratio)
         topFood = [food for food in results['list']['item'] if food['name'] == weighted[0][0]][0]
         foodname = topFood['name']
         ndbno = topFood['ndbno']
         calories = NDBSearch.get_calories(ndbno)
-        if calories is not None:
+        if calories:
               replystr = ('"{foodname}" has {calories:.0f} kcal per 100 g.'
                           'See more results at {url}?ds=Standard+Reference&qlookup={query}')
               bot.reply(replystr.format(
@@ -76,6 +84,5 @@ def calories_command(bot, trigger):
                 url=LOOKUPURL,
                 query=requests.utils.quote(query))
               )
-              return
-    bot.reply("No result")
-
+        else:
+            bot.reply("No result")
