@@ -53,7 +53,7 @@ class NDBSearch():
             firstfood = data['report']['foods'][0]
             nutrients = firstfood['nutrients']
             for n in nutrients:
-                nid = int(n['nurient_id'])
+                nid = int(n['nutrient_id'])
                 calperg = next(n['gm'] for n in nutrients if nid == CALORIE)
             return int(calperg)
         else:
