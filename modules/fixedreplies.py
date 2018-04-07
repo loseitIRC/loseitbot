@@ -18,6 +18,7 @@ commands = {
     ,'mfp' : 'https://www.myfitnesspal.com'
     ,'nwcr' : 'http://www.nwcr.ws/'
     ,'protein' : 'Consumption of 0.6-1.0 g/lb protein (along with lifting) minimizes muscle loss: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2858200/'
+    ,'recipes' : 'Recipes and other curated cooking suggestions: https://goo.gl/lF64F3'
     ,'source' : 'https://github.com/loseitIRC/loseitbot'
     ,'ss': 'http://liamrosen.com/fitness.html'
     ,'subfaq' : 'https://www.reddit.com/r/loseit/wiki/faq'
