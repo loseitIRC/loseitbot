@@ -5,9 +5,10 @@ commands = {
     ,'200' : 'What 200 calories looks like: www.wisegeek.com/what-does-200-calories-look-like.htm'
     ,'2000' : 'What 2000 calories look like: http://www.nytimes.com/interactive/2014/12/22/upshot/what-2000-calories-looks-like.html'
     ,'cooking' : 'Recipes and other curated cooking suggestions: https://goo.gl/lF64F3'
+    ,'crossword' : 'https://www.nytimes.com/crosswords/game/mini'
     ,'docs' : 'https://loseitirc.github.io/loseitdocs/'
     ,'ed' : ' http://www.cdc.gov/nccdphp/dnpa/nutrition/pdf/r2p_energy_density.pdf'
-#    ,'exchange' : 'Join Our #loseit Fit February Gift Exchange. Sign ups now through Feb 7th! https://goo.gl/forms/eIiW1Wm42tUUXdy33'
+    ,'exchange' : 'Join our holiday gift exchange! Sign-ups open through Nov 30, ship by Dec 18, available here: https://goo.gl/forms/wPacZsiLi55p3oEF2'
     ,'faq' : 'https://loseitirc.github.io/loseitdocs/faq.html'
     ,'flair' : 'Instructions for /r/loseit flair: https://www.reddit.com/r/loseit/wiki/faq#wiki_how_do_i_update_my_flair.3F'
     ,'flowchart' : 'The calorie counting flowchart: http://i.imgur.com/Nn04Cfs.png'
@@ -15,6 +16,7 @@ commands = {
     ,'harsh' : 'http://4chanfit.wikia.com/wiki/Harsh\'s_Worksheet_(WIP)'
     ,'keywest' : '#loseit will be going to Key West in Jan 2018: https://goo.gl/PMIHX4'
     ,'metabolism' : 'https://www.reddit.com/r/fatlogic/comments/2i6oa3/can_you_actually_break_your_metabolism/ckzboth'
+    ,'mini': 'https://www.nytimes.com/crosswords/game/mini'
     ,'mfp' : 'https://www.myfitnesspal.com'
     ,'nwcr' : 'http://www.nwcr.ws/'
     ,'protein' : 'Consumption of 0.6-1.0 g/lb protein (along with lifting) minimizes muscle loss: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2858200/'
@@ -28,7 +30,6 @@ commands = {
     ,'visualbmi' : 'https://loseitirc.github.io/visualbmi/'
     ,'water' : 'http://web.archive.org/web/20131114201153/http://www.scientificamerican.com/article.cfm?id=eight-glasses-water-per-day'
     ,'whatwillilooklike' : 'http://visualbmi.com/'
-    ,'mini': 'https://www.nytimes.com/crosswords/game/mini'
 }
 
 patterns = {
