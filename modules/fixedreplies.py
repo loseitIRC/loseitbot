@@ -28,6 +28,7 @@ commands = {
     ,'visualbmi' : 'https://loseitirc.github.io/visualbmi/'
     ,'water' : 'http://web.archive.org/web/20131114201153/http://www.scientificamerican.com/article.cfm?id=eight-glasses-water-per-day'
     ,'whatwillilooklike' : 'http://visualbmi.com/'
+    ,'mini': 'https://www.nytimes.com/crosswords/game/mini'
 }
 
 patterns = {
