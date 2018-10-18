@@ -14,10 +14,10 @@ def mini(bot, trigger):
       time = "0%s" % time
     todaysScores = scores.get(today, None)
     if todaysScores is None:
-      scores = {}
+      scores.clear()
       scores[today] = {}
       todaysScores = scores.get(today, None)
-    sender = trigger.sender.lower()
+    sender = trigger.nick
     if todaysScores.get(sender, None) is None:
       todaysScores[sender] = time
       bot.reply('Your time has been added!')
@@ -31,7 +31,7 @@ def mini(bot, trigger):
 def minileaderboard(bot, trigger):
   today = datetime.date.today().strftime('%Y%m%d')
   todaysScores = scores.get(today, None)
-  sender = trigger.sender.lower()
+  sender = trigger.nick
   if todaysScores is None:
     bot.reply('There are no scores recorded for the day. Be the first one to complete the mini!')
     return
@@ -43,3 +43,4 @@ def minileaderboard(bot, trigger):
     response = "%s, and you finished in %s." % response, selfScore
   response += " (Top %d times shown)" % numScores
   bot.reply(response)
+
