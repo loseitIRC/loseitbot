@@ -16,7 +16,6 @@ commands = {
     ,'harsh' : 'http://4chanfit.wikia.com/wiki/Harsh\'s_Worksheet_(WIP)'
     ,'keywest' : '#loseit will be going to Key West in Jan 2018: https://goo.gl/PMIHX4'
     ,'metabolism' : 'https://www.reddit.com/r/fatlogic/comments/2i6oa3/can_you_actually_break_your_metabolism/ckzboth'
-    ,'mini': 'https://www.nytimes.com/crosswords/game/mini'
     ,'mfp' : 'https://www.myfitnesspal.com'
     ,'nwcr' : 'http://www.nwcr.ws/'
     ,'protein' : 'Consumption of 0.6-1.0 g/lb protein (along with lifting) minimizes muscle loss: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2858200/'
